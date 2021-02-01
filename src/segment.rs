@@ -192,6 +192,27 @@ pub(crate) fn paste(segments: &[Segment]) -> Result<String> {
                         }
                         evaluated.push(acc.to_lowercase());
                     }
+                    "dromedary" => {
+                        let mut acc = String::new();
+                        let mut prev = 'L';
+                        for ch in last.chars() {
+                            if ch != '_' {
+                                if prev == '_' {
+                                    for chu in ch.to_uppercase() {
+                                        acc.push(chu);
+                                    }
+                                } else if prev.is_uppercase() {
+                                    for chl in ch.to_lowercase() {
+                                        acc.push(chl);
+                                    }
+                                } else {
+                                    acc.push(ch);
+                                }
+                            }
+                            prev = ch;
+                        }
+                        evaluated.push(acc);
+                    }
                     "camel" => {
                         let mut acc = String::new();
                         let mut prev = '_';
